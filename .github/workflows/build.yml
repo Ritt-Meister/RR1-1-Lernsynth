@@ -1,0 +1,39 @@
+name: Plugin bauen (Mac)
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  mac:
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - name: Code holen
+        uses: actions/checkout@v4
+
+      - name: Projekt vorbereiten (lädt JUCE)
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
+
+      - name: Plugin bauen
+        run: cmake --build build --config Release --parallel 4
+
+      - name: Paket schnüren
+        run: |
+          set -e
+          mkdir -p "RR-1 Lernsynth"
+          cp -R "build/RR1_artefacts/Release/AU/RR-1 Lernsynth.component" "RR-1 Lernsynth/"
+          cp -R "build/RR1_artefacts/Release/VST3/RR-1 Lernsynth.vst3"     "RR-1 Lernsynth/"
+          cp -R "build/RR1_artefacts/Release/Standalone/RR-1 Lernsynth.app" "RR-1 Lernsynth/"
+          # Ad-hoc-Signatur: nötig, damit Apple-Silicon-Macs das Plugin laden
+          codesign --force --deep --sign - "RR-1 Lernsynth/RR-1 Lernsynth.component"
+          codesign --force --deep --sign - "RR-1 Lernsynth/RR-1 Lernsynth.vst3"
+          codesign --force --deep --sign - "RR-1 Lernsynth/RR-1 Lernsynth.app"
+          ditto -c -k --keepParent "RR-1 Lernsynth" RR-1-Lernsynth-Mac.zip
+
+      - name: Zum Herunterladen bereitstellen
+        uses: actions/upload-artifact@v4
+        with:
+          name: RR-1-Lernsynth-Mac
+          path: RR-1-Lernsynth-Mac.zip
+          retention-days: 30
