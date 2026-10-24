@@ -51,9 +51,9 @@ namespace
         { 1, 1, 1, ID::lfoFilter,   "→ Filter",   "Wie stark der LFO den Filter-Cutoff bewegt: Wah-Wah, Atmen, Blubbern." },
 
         { 2, 0, 0, ID::osz1Lage,    "Fußlage",    "Fußlage wie bei der Orgel: 32' = tiefste, 2' = höchste Oktave. 8' = normale Tonhöhe." },
-        { 2, 0, 1, ID::osz1Form,    "Wellenform", "Wellenform = Klangfarbe: Sägezahn hell, Rechteck hohl, Dreieck weich, Puls dünn und nasal." },
+        { 2, 0, 1, ID::osz1Form,    "Wellenform", "Wellenform = Klangfarbe: Sägezahn hell, Rechteck hohl, Dreieck weich, Puls dünn und nasal, Sinus ganz rein (Sub-Bass)." },
         { 2, 1, 0, ID::osz2Lage,    "Fußlage",    "Fußlage von Oszillator 2. Eine Oktave tiefer als Oszillator 1 macht Bässe fetter." },
-        { 2, 1, 1, ID::osz2Form,    "Wellenform", "Wellenform von Oszillator 2. Zwei verschiedene Formen mischen ergibt neue Klangfarben." },
+        { 2, 1, 1, ID::osz2Form,    "Wellenform", "Wellenform von Oszillator 2. Zwei verschiedene Formen mischen ergibt neue Klangfarben. Tipp: Sinus eine Oktave tiefer = Sub-Bass." },
         { 2, 1, 2, ID::osz2Halbton, "Halbton",    "Verschiebt Oszillator 2 in Halbtönen: +7 = Quinte, +12 = Oktave, +3/+4 = Terz." },
         { 2, 1, 3, ID::osz2Fein,    "Fein",       "Feinverstimmung in Cent (1/100 Halbton). Leicht verstimmt gegen Oszillator 1 entsteht Schwebung." },
 
