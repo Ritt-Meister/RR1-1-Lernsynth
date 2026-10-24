@@ -88,7 +88,7 @@ inline juce::AudioProcessorValueTreeState::ParameterLayout erstelleParameter()
     };
 
     const StringArray lagen  { "32'", "16'", "8'", "4'", "2'" };
-    const StringArray formen { T ("Dreieck"), T ("Sägezahn"), T ("Rechteck"), T ("Puls") };
+    const StringArray formen { T ("Dreieck"), T ("Sägezahn"), T ("Rechteck"), T ("Puls"), T ("Sinus") };
 
     // Oszillatoren
     layout.add (std::make_unique<AudioParameterChoice> (ParameterID { ID::osz1Lage, 1 }, T ("Osz 1 Fußlage"), lagen, 2));
