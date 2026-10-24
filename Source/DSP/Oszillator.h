@@ -9,6 +9,7 @@
 //    Sägezahn   – hell und kräftig, alle Obertöne (Streicher, Bässe, Leads)
 //    Rechteck   – hohl, „holzig“ (nur ungerade Obertöne, Klarinette)
 //    Puls       – schmales Rechteck: dünn, nasal
+//    Sinus      – ganz rein, keine Obertöne (Sub-Bass, Pfeifen, Flöte)
 //
 //  Technik: Die „Phase“ läuft von 0 bis 1 und springt dann zurück auf 0.
 //  Daraus wird die Wellenform berechnet. Harte Sprünge (beim Sägezahn und
@@ -25,7 +26,7 @@ namespace rr1
 class Oszillator
 {
 public:
-    enum Form { Dreieck = 0, Saegezahn = 1, Rechteck = 2, Puls = 3 };
+    enum Form { Dreieck = 0, Saegezahn = 1, Rechteck = 2, Puls = 3, Sinus = 4 };
 
     void setSampleRate (double sr) { sampleRate = sr; }
     void setPhase (double p)       { phase = p; }
@@ -62,6 +63,11 @@ public:
                     aus = (aus - (2.0 * breite - 1.0)) * 0.75;
                 break;
             }
+
+            case Sinus:
+                // Reine Sinusschwingung: hat keine Sprünge, braucht kein PolyBLEP
+                aus = std::sin (2.0 * 3.14159265358979323846 * t);
+                break;
 
             case Dreieck:
             default:
